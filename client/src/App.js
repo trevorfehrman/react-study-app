@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { createGlobalStyle } from "styled-components";
 import { connect } from "react-redux";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
-import RegisterContainer from "./containers/Register"
+import RegisterContainer from "./containers/Register";
 import LoginContainer from "./containers/Login";
 import DashboardContainer from "./containers/Dashboard";
-import "./App.css";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -35,8 +34,8 @@ class App extends Component {
               <DashboardContainer {...props} user={this.props.user} />
             )}
           />
-          <Route path='/login' component={LoginContainer} />
-          <Router path='/register' component={RegisterContainer} />
+          <Route path="/login" component={LoginContainer} />
+          <Route path="/register" component={RegisterContainer} />
         </Switch>
       </div>
     );
@@ -44,7 +43,7 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ authReducer }) => ({
-  user: authReducer.user,
+  user: authReducer.user
 });
 
 export default connect(mapStateToProps)(App);

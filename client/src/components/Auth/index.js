@@ -36,7 +36,7 @@ const InputWrapper = styled.input`
     border: none;
 `;
 
-export const Input = ({ name, type, handleSubmit, value, placeholder }) => (
+export const Input = ({ name, type, handleChange, value, placeholder }) => (
     <InputWrapper
         name={name}
         type={type}

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
+import _ from 'lodash';
+
+import { Wrapper, Input } from '../components/Auth';
 
 const Register = () => {
   const [user, setValue] = useState({
