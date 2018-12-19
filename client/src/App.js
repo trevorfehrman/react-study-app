@@ -25,7 +25,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <GloabalStyle />
+        <GlobalStyle />
 
         <Switch>
           <Route
