@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { connect } from "react-redux";
 import { Route, Switch, withRouter } from "react-router-dom";
-import 'primereact/resources/themes/nova-light/theme.css';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
+import "primereact/resources/themes/nova-light/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 
 import RegisterContainer from "./containers/Register";
 import LoginContainer from "./containers/Login";
 import DashboardContainer from "./containers/Dashboard";
-import ForumContainter from './containers/Forum';
+import ForumContainter from "./containers/Forum";
 
 
-import { checkUser } from './store/actions/authActions'
+import { checkUser } from "./store/actions/authActions";
 
-import { DarkMode } from './Themes/dark';
-import { LightMode } from './Themes/light';
+import { DarkMode } from "./Themes/dark";
+import { LightMode } from "./Themes/light";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -27,12 +27,25 @@ const GlobalStyle = createGlobalStyle`
     html, body {
       height: 100%;
       width: 100%;
+      background-color: ${props => props.theme.main};
+      color: ${props => props.theme.text}
     }
 `;
 
-class App extends Component {
-  render() {
-    return (
+const Wrapper = styled.div`
+  width: 100%;
+  padding: 125px 24px 20px;
+  display: flex;
+  justify-content: center;
+`;
+
+const App = ({ user, history, checkUser }) => {
+  const [darkMode, setValue] = useState(faslse);
+  useEffect(() => {
+    checkUser();
+  }, []);
+  return (
+    <ThemeProvider theme={darkMode ? DarkMode : LightMode}>
       <div>
         <GlobalStyle />
 
@@ -48,9 +61,9 @@ class App extends Component {
           <Route path="/register" component={RegisterContainer} />
         </Switch>
       </div>
-    );
-  }
-}
+    </ThemeProvider>
+  );
+};
 
 const mapStateToProps = ({ authReducer }) => ({
   user: authReducer.user
