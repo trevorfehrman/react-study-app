@@ -1,7 +1,10 @@
-import React, { Component } from "react";
-import { createGlobalStyle } from "styled-components";
+import React, { useEffect, useState } from "react";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { connect } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
 
 import RegisterContainer from "./containers/Register";
 import LoginContainer from "./containers/Login";
