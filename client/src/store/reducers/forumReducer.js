@@ -57,3 +57,5 @@ const forumReducer = (state = initialState, { payload, type }) => {
       return state;
   }
 };
+
+export default forumReducer;

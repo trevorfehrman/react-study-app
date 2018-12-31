@@ -9,6 +9,13 @@ import 'primeicons/primeicons.css';
 import RegisterContainer from "./containers/Register";
 import LoginContainer from "./containers/Login";
 import DashboardContainer from "./containers/Dashboard";
+import ForumContainter from './containers/Forum';
+
+
+import { checkUser } from './store/actions/authActions'
+
+import { DarkMode } from './Themes/dark';
+import { LightMode } from './Themes/light';
 
 const GlobalStyle = createGlobalStyle`
   * {
