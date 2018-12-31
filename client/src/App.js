@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { connect } from "react-redux";
 import { Route, Switch, withRouter } from "react-router-dom";
 import "primereact/resources/themes/nova-light/theme.css";
 import "primereact/resources/primereact.min.css";
 import "primeicons/primeicons.css";
 
-import RegisterContainer from "./containers/Register";
 import LoginContainer from "./containers/Login";
+import RegisterContainer from "./containers/Register";
 import DashboardContainer from "./containers/Dashboard";
-import ForumContainter from "./containers/Forum";
+import ForumContainer from "./containers/Forum";
 
 import Header from "./components/Header";
 
@@ -17,7 +17,6 @@ import { checkUser } from "./store/actions/authActions";
 
 import { DarkMode } from "./Themes/dark";
 import { LightMode } from "./Themes/light";
-import { FETCH_USER_SUCCESS } from "./store/actions";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -42,7 +41,7 @@ const Wrapper = styled.div`
 `;
 
 const App = ({ user, history, checkUser }) => {
-  const [darkMode, setValue] = useState(faslse);
+  const [darkMode, setValue] = useState(false);
   useEffect(() => {
     checkUser();
   }, []);
@@ -78,4 +77,4 @@ const mapStateToProps = ({ authReducer }) => ({
   user: authReducer.user
 });
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps, { checkUser })(App));
