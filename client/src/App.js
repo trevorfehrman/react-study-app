@@ -11,11 +11,13 @@ import LoginContainer from "./containers/Login";
 import DashboardContainer from "./containers/Dashboard";
 import ForumContainter from "./containers/Forum";
 
+import Header from "./components/Header";
 
 import { checkUser } from "./store/actions/authActions";
 
 import { DarkMode } from "./Themes/dark";
 import { LightMode } from "./Themes/light";
+import { FETCH_USER_SUCCESS } from "./store/actions";
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -46,21 +48,28 @@ const App = ({ user, history, checkUser }) => {
   }, []);
   return (
     <ThemeProvider theme={darkMode ? DarkMode : LightMode}>
-      <div>
-        <GlobalStyle />
-
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <DashboardContainer {...props} user={this.props.user} />
-            )}
-          />
-          <Route path="/login" component={LoginContainer} />
-          <Route path="/register" component={RegisterContainer} />
-        </Switch>
-      </div>
+      <GlobalStyle />
+      <Header user={user} setValue={setValue} darkMode={darkMode} />
+      <Wrapper>
+        <div style={{ width: "648px" }}>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <DashboardContainer {...props} user={this.props.user} />
+              )}
+            />
+            <Route path="/login" component={LoginContainer} />
+            <Route path="/register" component={RegisterContainer} />
+            <Route
+              exact
+              path="/forum"
+              render={props => <ForumContainer {...props} user={user} />}
+            />
+          </Switch>
+        </div>
+      </Wrapper>
     </ThemeProvider>
   );
 };
