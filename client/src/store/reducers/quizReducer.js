@@ -49,3 +49,5 @@ const quizReducer = (state = initialState, { payload, type }) => {
 			return state;
     }
 }
+
+export default quizReducer;

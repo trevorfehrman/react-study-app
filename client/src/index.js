@@ -7,11 +7,10 @@ import configureStore from './store';
 import App from './App';
 
 const app = (
-    <Provider store={configureStore()}>
-        <Router>
-            <App />
-        </Router>
-    </Provider>
-)
-
+	<Provider store={configureStore()}>
+		<Router>
+			<App />
+		</Router>
+	</Provider>
+);
 ReactDOM.render(app, document.getElementById('root'));
