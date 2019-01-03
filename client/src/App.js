@@ -47,28 +47,28 @@ const App = ({ user, history, checkUser }) => {
   }, []);
   return (
     <ThemeProvider theme={darkMode ? DarkMode : LightMode}>
-      <GlobalStyle />
-      <Header user={user} setValue={setValue} darkMode={darkMode} />
-      <Wrapper>
-        <div style={{ width: "648px" }}>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <DashboardContainer {...props} user={this.props.user} />
-              )}
-            />
-            <Route path="/login" component={LoginContainer} />
-            <Route path="/register" component={RegisterContainer} />
-            <Route
-              exact
-              path="/forum"
-              render={props => <ForumContainer {...props} user={user} />}
-            />
-          </Switch>
-        </div>
-      </Wrapper>
+      <div>
+        <GlobalStyle />
+        <Header user={user} setValue={setValue} darkMode={darkMode} />
+        <Wrapper>
+          <div style={{ width: "648px" }}>
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={props => <DashboardContainer {...props} user={user} />}
+              />
+              <Route path="/login" component={LoginContainer} />
+              <Route path="/register" component={RegisterContainer} />
+              <Route
+                exact
+                path="/forum"
+                render={props => <ForumContainer {...props} user={user} />}
+              />
+            </Switch>
+          </div>
+        </Wrapper>
+      </div>
     </ThemeProvider>
   );
 };
@@ -77,4 +77,9 @@ const mapStateToProps = ({ authReducer }) => ({
   user: authReducer.user
 });
 
-export default withRouter(connect(mapStateToProps, { checkUser })(App));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { checkUser }
+  )(App)
+);
