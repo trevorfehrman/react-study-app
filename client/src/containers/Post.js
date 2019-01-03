@@ -6,34 +6,34 @@ import { Post as PostWrapper } from '../components/Forum/Post';
 import { NewComment, CommentArea, Comment } from '../components/Forum/Comment';
 
 const Post = ({ user, post, loading, fetchPost, ...props }) => {
-    useEffect(
-        () => {
-            if (!post) {
-                fetchPost(props.match.params,id);
-            }
-        },
-        [post],
-    );
+	useEffect(
+		() => {
+			if (!post) {
+				fetchPost(props.match.params.id);
+			}
+		},
+		[ post ],
+	);
 
-    if (post) 
-        return (
-            <PostWrapper post={post} user={user}>
-                {user && <NewComment user={user}/>}
-                {post.commments.length && (
-                    <CommentArea>
-                        {post.comments.map(comment => (
-                            <Comment key={comment.id} comment={comment}/>
-                        ))}
-                    </CommentArea>
-                )}
-            </PostWrapper>
-        );
-    else return <div>Loading...</div>
-}
+	if (post)
+		return (
+			<PostWrapper post={post} user={user}>
+				{user && <NewComment user={user} />}
+				{post.comments.length && (
+					<CommentArea>
+						{post.comments.map(comment => (
+							<Comment key={comment.id} comment={comment} />
+						))}
+					</CommentArea>
+				)}
+			</PostWrapper>
+		);
+	else return <div>Loading...</div>;
+};
 
-const mapStateToProps = ({ forumReducer }) > ({
-    post: forumReducer.post,
-    loading: forumReducer.loading,
+const mapStateToProps = ({ forumReducer }) => ({
+	post: forumReducer.post,
+	loading: forumReducer.loading,
 });
 
-export default connect(mapStateToProps, {fetchPost})(Post);
+export default connect(mapStateToProps, { fetchPost })(Post);
